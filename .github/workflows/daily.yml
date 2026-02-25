@@ -2,8 +2,11 @@ name: Daily Commit
 
 on:
   schedule:
-    - cron: '0 18 * * *'   # Runs every day at 6:00 PM UTC
+    - cron: '0 18 * * *'   # 6:00 PM UTC (11:30 PM IST)
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -19,8 +22,8 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config --global user.name "Ronald K S"
-          git config --global user.email "ronogaming24@gmail.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Daily auto commit"
+          git diff --cached --quiet || git commit -m "Daily auto commit"
           git push
